@@ -17,7 +17,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "validators >= 0.24.0".
+    "validators >= 0.24.0",
 ]
 
 [project.urls]
