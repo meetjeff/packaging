@@ -32,7 +32,7 @@ jobs:
         pipenv install --dev --deploy --system
     - name: Run tests
       env:
-        PYTHONPATH: "$GITHUB_WORKSPACE/src" 
+        PYTHONPATH: "${{ github.workspace }}/src" 
       run:
         pytest -v --random-order
 
