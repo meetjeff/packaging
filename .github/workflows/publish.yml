@@ -54,15 +54,19 @@ jobs:
         pip install build twine
     - name: Build package
       run: python -m build
+    - name: echo
+      run: |
+        echo "github.ref ${{ github.ref }}"
+        echo "github.base_ref ${{ github.base_ref }}"
     - name: Publish Test
-      if: github.ref != 'refs/heads/main'
+      if: github.ref != 'refs/heads/main' && github.base_ref != 'main'
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.TESTPYPI_API_TOKEN }}
       run:
         twine upload --repository testpypi dist/*
     - name: Publish
-      if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/main' || github.base_ref == 'main'
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}

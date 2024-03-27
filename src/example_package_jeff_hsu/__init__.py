@@ -1,0 +1,1 @@
+from .example import check_email, check_url
