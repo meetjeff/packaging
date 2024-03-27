@@ -55,14 +55,14 @@ jobs:
     - name: Build package
       run: python -m build
     - name: Publish Test
-      if: github.ref != 'refs/heads/main'
+      if: endsWith(github.ref, 'test')
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.TESTPYPI_API_TOKEN }}
       run:
         twine upload --repository testpypi dist/*
     - name: Publish
-      if: github.ref == 'refs/heads/main'
+      if: ${{ !endsWith(github.ref, 'test') }}
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
